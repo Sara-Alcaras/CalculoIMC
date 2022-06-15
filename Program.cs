@@ -37,13 +37,13 @@ public class Program
         Sexo = ValidaSexo(Console.ReadLine());
 
         Console.Write("\nInforme sua idade: ");
-        Idade = ValidaIdade(int.Parse(Console.ReadLine()));
+        Idade = ValidaIdade(Console.ReadLine());
 
         Console.Write("\nInforme sua altura em centímetros(cm): ");
-        Altura = float.Parse(Console.ReadLine());
+        Altura = ValidaAltura(Console.ReadLine());
 
         Console.Write("\nInforme seu peso(kg): ");
-        Peso = float.Parse(Console.ReadLine());
+        Peso = ValidaPeso(Console.ReadLine());
 
         Console.Clear();
     }
@@ -52,8 +52,10 @@ public class Program
     #region Métodos para validação de entrada de dados
     public static string ValidaNome(string nome) // Verifica se o nome é válido
     {
-        if (nome == null || nome == " " || nome.Length <= 1)
-        {
+        bool eNumero = int.TryParse(nome,out int r); // Tenta converter a propriedade (nome) pra inteiro
+
+        if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length <= 2) // Verifica se o usuário está inserindo nulo, vazio ou numero 
+        { 
             Console.Write("\nNome Inválido! \r\nInforme seu nome novamente: ");
             ValidaNome(Console.ReadLine());
         }
@@ -62,7 +64,8 @@ public class Program
 
     public static int ValidaSexo(string strSexo) // Verifica se o sexo é válido
     {
-        int sexo = int.Parse(strSexo);
+        int sexo;
+        int.TryParse(strSexo, out sexo);
 
         switch (sexo)
         {
@@ -76,34 +79,53 @@ public class Program
         return sexo;
     }
 
-    public static int ValidaIdade(int idade) // Verifica se a idade é válida
+    public static int ValidaIdade(string strIdade) // Verifica se a idade é válida
     {
-        if (idade <= 0 || idade == 100)
+        int idade;
+        int.TryParse(strIdade, out idade);
+
+        switch (idade)
         {
-            Console.Write("\nIdade Inválida! \r\nInforme sua idade novamente: ");
-            ValidaIdade(int.Parse(Console.ReadLine()));
+            case  >1 and <130:
+                break;
+            default:
+                Console.Write("\nIdade Inválida! \r\nInforme sua idade novamente: ");
+                ValidaIdade(Console.ReadLine());
+                break;
         }
         return idade;
     }
 
-    public static float ValidaAltura(float altura) // Verifica se a altura é válida
+    public static int ValidaAltura(string strAltura) // Verifica se a altura é válida
     {
+        int altura;
+        int.TryParse(strAltura, out altura);
 
-        if (altura <= 0)
+        switch (altura)
         {
-            Console.Write("\nIdade Inválida! \r\nInforme sua idade novamente: ");
-            ValidaIdade(int.Parse(Console.ReadLine()));
+            case >=100 and <=200:
+                break;
+            default:
+                Console.Write("\nIdade Inválida! \r\nInforme sua altura novamente: ");
+                ValidaAltura(Console.ReadLine());
+                break;
         }
         return altura;
     }
 
-    public static float ValidaPeso(float peso)
+    public static int ValidaPeso(string strPeso) // Verifica se a altura é válida
     {
+        int peso;
+        int.TryParse(strPeso, out peso);
 
-        if (peso <= 0)
+        switch (peso)
         {
-            Console.Write("\nIdade Inválida! \r\nInforme sua idade novamente: ");
-            ValidaIdade(int.Parse(Console.ReadLine()));
+            case >= 20 and <= 200:
+                break;
+            default:
+                Console.Write("\nPeso Inválido! \r\nInforme seu peso novamente: ");
+                ValidaPeso(Console.ReadLine());
+                break;
         }
         return peso;
     }
