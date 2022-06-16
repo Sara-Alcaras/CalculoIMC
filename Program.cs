@@ -137,7 +137,13 @@ public class Program
         if (idade > 65) return "Idoso";
         return "Nenhuma";
     }
- 
+    public static float calculaIMC(float peso, float altura) // Método que faz o calculo do IMC
+    {
+
+        float imc = peso / (altura * altura);
+        return imc;
+    }
+
     //criar Metodo Verifica imc baseado na propriedade imc publica
 
 
