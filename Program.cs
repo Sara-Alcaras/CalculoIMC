@@ -9,8 +9,9 @@ public class Program
     public static float Altura { get; set; }
     public static float Peso { get; set; }
     public static string ImcDesejavel { get; set; }
-    public static float ImcRisco { get; set; }
+    public static string ImcRisco { get; set; }
     public static string ImcRecomendacao { get; set; }
+    //public static System.Globalization.CultureInfo InvariantCulture { get; }
     #endregion
     static void Main(string[] args)
     {
@@ -18,8 +19,6 @@ public class Program
         //Método com entrada de dados
         Inicio();
 
-        //Método que faz o calculo do IMC
-        //calculaIMC();
         #endregion
 
     }
@@ -52,10 +51,10 @@ public class Program
     #region Métodos para validação de entrada de dados
     public static string ValidaNome(string nome) // Verifica se o nome é válido
     {
-        bool eNumero = int.TryParse(nome,out int r); // Tenta converter a propriedade (nome) pra inteiro
+        bool eNumero = int.TryParse(nome, out int r); // Tenta converter a propriedade (nome) pra inteiro
 
         if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length <= 2) // Verifica se o usuário está inserindo nulo, vazio ou numero 
-        { 
+        {
             Console.Write("\nNome Inválido! \r\nInforme seu nome novamente: ");
             ValidaNome(Console.ReadLine());
         }
@@ -86,7 +85,7 @@ public class Program
 
         switch (idade)
         {
-            case  >1 and <130:
+            case > 1 and < 130:
                 break;
             default:
                 Console.Write("\nIdade Inválida! \r\nInforme sua idade novamente: ");
@@ -103,7 +102,7 @@ public class Program
 
         switch (altura)
         {
-            case >=100 and <=200:
+            case >= 100 and <= 200:
                 break;
             default:
                 Console.Write("\nIdade Inválida! \r\nInforme sua altura novamente: ");
@@ -113,7 +112,7 @@ public class Program
         return altura;
     }
 
-    public static int ValidaPeso(string strPeso) // Verifica se a altura é válida
+    public static int ValidaPeso(string strPeso) // Verifica se o peso é válido
     {
         int peso;
         int.TryParse(strPeso, out peso);
@@ -130,31 +129,21 @@ public class Program
         return peso;
     }
     #endregion
-    //criar um metodo de FIM
-    //DEVE retornar todos os atributos relacionados a saida de dados
-
-
-    //criar Metodo calculaIMC
-    //public static void calculaIMC()
-    //{
-    //    imc = Peso / (Altura * Altura);
-    //    Console.WriteLine("Resultado IMC: " + imc.ToString());
-    //}
-
-
-    //criar um metodo verifica categoria  
-
-
+    public static string VerificaCategoria(int idade) // Define a categoria de idade
+    {
+        if (idade < 12) return "Infantil";
+        if (idade >= 12 && idade <= 20) return "Juvenil";
+        if (idade >= 21 && idade <= 65) return "Adulto";
+        if (idade > 65) return "Idoso";
+        return "Nenhuma";
+    }
+ 
     //criar Metodo Verifica imc baseado na propriedade imc publica
+
+
+
     // o metodo deve utilizar o
-    // switch (imc) {
-    //      case < 20:
-    //          ImcRisco = escrever mensagem do risco;
-    //ImcDesejavel = escrever mensagem do imc desejavel;
-    //ImcRecomendacao = escrever mensagem da recomendacaoinicial
-    //      break;
-    // default: break;
-    // }
+
 
     //     if (imc< 20)
     //            Console.WriteLine("Abaixo do peso ideal: Muitas complicações de saúde como doenças pulmonares e cardiovasculares podem estar associadas ao baixo peso.");
@@ -171,4 +160,22 @@ public class Program
     //        else if (imc >= 35)
     //            Console.WriteLine("Super obesidade: obeso mórbido vive menos, tem alto risco de mortalidade geral por diversas causas. ");
     //
+
+    //criar um metodo de FIM
+    //DEVE retornar todos os atributos relacionados a saida de dados
+    //public static void Fim()
+    //{
+    //    Console.WriteLine("Resultado DIAGNÓSTICO PRÉVIO IMC");
+    //    Console.WriteLine("*************************************************************************");
+
+    //    Console.WriteLine($"Nome: {Nome}");
+    //    Console.WriteLine($"Sexo: {Sexo}");
+    //    Console.WriteLine($"Idade: {Idade}");
+    //    Console.WriteLine($"Altura: {Altura}");
+    //    Console.WriteLine($"Peso: {Peso}");
+    //    Console.WriteLine($"Categoria: {VerificaCategoria(Idade)} \r\n");
+    //    Console.WriteLine($"IMC Desejável: Entre 20 e 24");
+
+    //    var imc = calculaIMC(altura, peso);
+    //}
 }
