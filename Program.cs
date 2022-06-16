@@ -1,4 +1,6 @@
-﻿namespace CalculoIMC;
+﻿using System.Globalization;
+
+namespace CalculoIMC;
 
 public class Program
 {
@@ -36,7 +38,7 @@ public class Program
         Console.WriteLine("Olá! Seja bem-vindo. Insira seus dados para calcular o DIAGNÓSTICO PRÉVIO IMC");
         Console.WriteLine("*****************************************************************************");
 
-        Console.Write("\nInforme seu nome: ");
+        Console.Write("\nInforme seu nome: "); // \n Quebra a linha de impressão no console
         Nome = ValidaNome(Console.ReadLine());
 
         Console.WriteLine("\nDigite o número que corresponde ao seu sexo: \n1- Masculino\n2- Feminino\n3- Outro ");
@@ -45,7 +47,7 @@ public class Program
         Console.Write("\nInforme sua idade: ");
         Idade = ValidaIdade(Console.ReadLine());
 
-        Console.Write("\nInforme sua altura em centímetros(cm): ");
+        Console.Write("\nInforme sua altura: ");
         Altura = ValidaAltura(Console.ReadLine());
 
         Console.Write("\nInforme seu peso(kg): ");
@@ -59,7 +61,7 @@ public class Program
     public static string ValidaNome(string nome) // Verifica se o nome é válido
     {
         bool eNumero = int.TryParse(nome, out int r); // Tenta converter a propriedade (nome) pra inteiro
-        string nomeValido = string.Empty;
+        string nomeValido = string.Empty; // Define nome como uma string vazia
         bool eInvalido = string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length <= 2;
 
         while (eInvalido)
@@ -75,7 +77,7 @@ public class Program
 
     public static string ValidaSexo(string strSexo) // Verifica se o sexo é válido
     {
-        string sexo = string.Empty;
+        string sexo = string.Empty; 
         int tipoSexo;
         int.TryParse(strSexo, out tipoSexo);
 
@@ -118,14 +120,15 @@ public class Program
     public static float ValidaAltura(string strAltura) // Verifica se a altura é válida
     {
         float altura;
-        float.TryParse(strAltura, out altura);
-
+        //float.TryParse(strAltura, out altura);
+        float.TryParse(strAltura.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out altura);
         switch (altura)
         {
-            case >= 100 and <= 200:
+            case > 0 and <= 2.60f:
                 break;
             default:
                 Console.Write("\nAltura Inválida! \r\nInforme sua altura novamente: ");
+                //float chamaFuncao = float.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
                 ValidaAltura(Console.ReadLine());
                 break;
         }
@@ -135,7 +138,7 @@ public class Program
     public static float ValidaPeso(string strPeso) // Verifica se o peso é válido
     {
         float peso;
-        float.TryParse(strPeso, out peso);
+        float.TryParse(strPeso.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out peso);
 
         switch (peso)
         {
