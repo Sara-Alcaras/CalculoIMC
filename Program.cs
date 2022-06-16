@@ -16,7 +16,6 @@ public class Program
     static void Main(string[] args)
     {
         #region Chama os métodos
-        //Método com entrada de dados
         Inicio();
         VerificaDados();
         Fim();
@@ -24,7 +23,7 @@ public class Program
 
     }
 
-    private static void VerificaDados()
+    private static void VerificaDados() // Método que chama todos os dados de verificação
     {
         CalculaIMC(Peso, Altura);
         VerificaCategoria(Idade);
@@ -60,11 +59,16 @@ public class Program
     public static string ValidaNome(string nome) // Verifica se o nome é válido
     {
         bool eNumero = int.TryParse(nome, out int r); // Tenta converter a propriedade (nome) pra inteiro
+        string nomeValido = string.Empty;
+        bool eInvalido = string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length <= 2;
 
-        if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length <= 2) // Verifica se o usuário está inserindo nulo, vazio ou numero 
+        while (eInvalido)
         {
+
             Console.Write("\nNome Inválido! \r\nInforme seu nome novamente: ");
-            ValidaNome(Console.ReadLine());
+            nome = Console.ReadLine();
+            if (string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || eNumero || nome.Length > 2) // Verifica se o usuário está inserindo nulo, vazio ou numero 
+                eInvalido = false;
         }
         return nome;
     }
@@ -80,7 +84,7 @@ public class Program
             case 1:
                 sexo = "Masculino";
                 break;
-            case  2 :
+            case 2:
                 sexo = "Feminino";
                 break;
             case 3:
@@ -145,12 +149,14 @@ public class Program
         return peso;
     }
     #endregion
+
+    #region Métodos para verificação dos e saida dos dados
     public static void VerificaCategoria(int idade) // Define a categoria de idade
     {
         switch (idade)
         {
             case < 12:
-               Categoria = "Infantil";
+                Categoria = "Infantil";
                 break;
             case >= 12 and <= 20:
                 Categoria = "Juvenil";
@@ -161,13 +167,13 @@ public class Program
             case > 65:
                 Categoria = "Idoso";
                 break;
-                
+
         }
     }
     public static void CalculaIMC(float peso, float altura) // Método que faz o calculo do IMC
     {
         Imc = peso / (altura * altura);
-        
+
     }
 
     public static void VerificaIMC(float imc) // Método que faz o calculo do IMC
@@ -183,8 +189,8 @@ public class Program
                 ImcRisco = "Seu peso está ideal para suas referências.";
                 break;
             case >= 25 and <= 29:
-                ImcRecomendacao  = "Adote um tratamento baseado em dieta balanceada, exercício físico e medicação. A ajuda de um profissional pode ser interessante";
-                ImcRisco= "Aumento de peso apresenta risco moderado para outras doenças crônicas e cardiovasculares.";
+                ImcRecomendacao = "Adote um tratamento baseado em dieta balanceada, exercício físico e medicação. A ajuda de um profissional pode ser interessante";
+                ImcRisco = "Aumento de peso apresenta risco moderado para outras doenças crônicas e cardiovasculares.";
                 break;
             case >= 30 and <= 35:
                 ImcRecomendacao = "Adote uma dieta alimentar rigorosa, com o acompanhamento de um nutricionista e um médico especialista(endócrino).";
@@ -196,7 +202,8 @@ public class Program
                 break;
         }
     }
-    public static void Fim()
+
+    public static void Fim() // Método que retorna os dados na tela
     {
         Console.WriteLine("Resultado DIAGNÓSTICO PRÉVIO IMC");
         Console.WriteLine("********************************");
@@ -213,4 +220,5 @@ public class Program
         Console.WriteLine($"\n\rRiscos: {ImcRisco}");
         Console.WriteLine($"\n\rRecomendações: {ImcRecomendacao}");
     }
+    #endregion
 }
