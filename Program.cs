@@ -4,15 +4,17 @@ public class CalculadoraIMC : Usuario
 {
     static void Main(string[] args)
     {
+        #region Inicializa os métodos
         UtilsConsole.Inicializacao();
 
         EntradaEValidacaoDados();
         VerificaDadosIMC();
 
         UtilsConsole.Fim();
+        #endregion
     }
 
-    public static void EntradaEValidacaoDados()
+    public static void EntradaEValidacaoDados() // Método que chama as entrada dos dados conforme o tipo do dado e chama o método de validação
     {
         UtilsConsole.ExibeMensagemEntradaDado(TipoDado.Nome);
         Nome = RecebeDado(TipoDado.Nome);
@@ -30,9 +32,9 @@ public class CalculadoraIMC : Usuario
         Peso = float.Parse(RecebeDado(TipoDado.Peso));
 
         UtilsConsole.LimparTela();
-    } // entrada dos dados e chamada do metodo de validacao
+    }
 
-    public static string RecebeDado(TipoDado tipoDado) // validacao dos dados recebidos
+    public static string RecebeDado(TipoDado tipoDado) // Método que recebe todos os dados digitados pelo usuário
     {
         string dado = Console.ReadLine();
         string dadoValido = String.Empty;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculoIMC
 {
-    public enum TipoDado
+    public enum TipoDado // Tipo de entrada de dado
     {
         Nome,
         Sexo,

@@ -2,7 +2,7 @@
 {
     public static class Erro
     {
-        public static void ExibeErro(TipoDado tipoErro)
+        public static void ExibeErro(TipoDado tipoErro) // Metodo para exibir mensagens de erro conforme o tipo do dado informado
         {
             string mensagemErro;
             switch (tipoErro)

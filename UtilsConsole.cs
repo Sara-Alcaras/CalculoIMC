@@ -2,12 +2,12 @@
 {
     internal class UtilsConsole : Usuario
     {
-        public static string CapturaDadoDigitado() // método para entrada de dado
+        public static string CapturaDadoDigitado() // Método para entrada de dado
         {
             return Console.ReadLine();
         }
 
-        public static void ExibeMensagemEntradaDado(TipoDado tipoMensagem)
+        public static void ExibeMensagemEntradaDado(TipoDado tipoMensagem) 
         {
             string mensagem = String.Empty;
             switch (tipoMensagem)
@@ -35,7 +35,7 @@
             Console.Write(mensagem);
         }
 
-        public static void Inicializacao()
+        public static void Inicializacao() // Inicia o programa com a primeira mensagem
         {
 
             Console.WriteLine("Olá! Seja bem-vindo. Insira seus dados para calcular o DIAGNÓSTICO PRÉVIO IMC");

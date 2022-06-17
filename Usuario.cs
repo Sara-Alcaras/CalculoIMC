@@ -8,14 +8,15 @@ namespace CalculoIMC
 {
     public class Usuario : DadosIMC
     {
+        #region Propriedades Públicas
         public static string Nome { get; set; }
         public static string Sexo { get; set; }
         public static int Idade { get; set; }
         public static float Altura { get; set; }
         public static float Peso { get; set; }
         public static TipoCategoria Categoria { get { return VerificaCategoria(Idade); } }
-
-        public static TipoCategoria VerificaCategoria(int idade) // Define a categoria de idade
+        #endregion
+        public static TipoCategoria VerificaCategoria(int idade) // Método que define a categoria de idade conforme o método tipoCategoria
         {
             TipoCategoria tipoCategoria;
 

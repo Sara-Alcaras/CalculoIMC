@@ -18,7 +18,7 @@ namespace CalculoIMC
             Imc = peso / (altura * altura);
         }
 
-        public static void VerificaIMC(float imc) // Método que faz o calculo do IMC
+        public static void VerificaIMC(float imc) // Método que verifica o resultado do IMC e retorna recomendação e risco conforme o calculo
         {
             switch (imc)
             {

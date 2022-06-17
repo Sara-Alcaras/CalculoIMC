@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CalculoIMC
 {
-    public enum TipoCategoria
+    public enum TipoCategoria // Categoria de idade
     {
         Infantil,
         Juvenil,
