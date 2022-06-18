@@ -2,9 +2,43 @@
 {
     internal class UtilsConsole : Usuario
     {
-        public static string CapturaDadoDigitado() // Método para entrada de dado
+        public static void Inicializacao() // Inicia o programa com a primeira mensagem
         {
-            return Console.ReadLine();
+
+            Console.WriteLine("Olá! Seja bem-vindo. Insira seus dados para calcular o DIAGNÓSTICO PRÉVIO IMC");
+            Console.WriteLine("*****************************************************************************");
+
+        }
+
+        public static void Fim() // Método que retorna os dados na tela
+        {
+            ExibeMensagem("Resultado DIAGNÓSTICO PRÉVIO IMC");
+            ExibeMensagem("********************************");
+
+            ExibeMensagem($"Nome: {Nome}");
+            ExibeMensagem($"Sexo: {Sexo}");
+            ExibeMensagem($"Idade: {Idade}");
+            ExibeMensagem($"Altura: {Altura}");
+            ExibeMensagem($"Peso: {Peso}");
+            ExibeMensagem($"Categoria: {Categoria}");
+
+            ExibeMensagem($"\n\nIMC Desejável: Entre 20 e 24");
+            ExibeMensagem($"\n\rResultado IMC: {Imc.ToString("F2")}");
+            ExibeMensagem($"\n\rRiscos: {ImcRisco}");
+            ExibeMensagem($"\n\rRecomendações: {ImcRecomendacao}");
+
+            ExibeMensagem("\n\r**********************************************************************************");
+
+        }
+
+        public static void ExibeMensagem(string mensagem)
+        {
+            Console.WriteLine(mensagem);
+        }
+
+        public static void LimparTela()
+        {
+            Console.Clear();
         }
 
         public static void ExibeMensagemEntradaDado(TipoDado tipoMensagem) 
@@ -35,43 +69,53 @@
             Console.Write(mensagem);
         }
 
-        public static void Inicializacao() // Inicia o programa com a primeira mensagem
+        public static string CapturaDadoDigitado() // Método para entrada de dado
         {
-
-            Console.WriteLine("Olá! Seja bem-vindo. Insira seus dados para calcular o DIAGNÓSTICO PRÉVIO IMC");
-            Console.WriteLine("*****************************************************************************");
-
+            return Console.ReadLine();
         }
 
-        public static void Fim() // Método que retorna os dados na tela
+        public static bool VerificaContinuidade() // Método para validar a continuidade da execução dos calculos
         {
-            Console.WriteLine("Resultado DIAGNÓSTICO PRÉVIO IMC");
-            Console.WriteLine("********************************");
+            bool eValido = false;
+            string opcaoEscolhida = String.Empty;
 
-            Console.WriteLine($"Nome: {Nome}");
-            Console.WriteLine($"Sexo: {Sexo}");
-            Console.WriteLine($"Idade: {Idade}");
-            Console.WriteLine($"Altura: {Altura}");
-            Console.WriteLine($"Peso: {Peso}");
-            Console.WriteLine($"Categoria: {Categoria}");
+            ExibeMensagem("\n\rDeseja calcular novamente?\n1- Sim\n2- Não\n\r");
 
-            Console.WriteLine($"\n\nIMC Desejável: Entre 20 e 24");
+            var opcoes = new[] { "1", "2" }; // array para armazenar as opcoes validas
 
-            Console.WriteLine($"\n\rResultado IMC: {Imc.ToString("F2")}");
+            while (!eValido)
+            {
+                opcaoEscolhida = CapturaDadoDigitado(); // entrada de dado
+                // se a opcao escolhida estiver dentro do array com as opcoes validas e for igual a um, é uma opcao valida
+                eValido = opcoes.Any(opcaoEscolhida.Contains) && opcaoEscolhida.Length == 1; 
 
-            Console.WriteLine($"\n\rRiscos: {ImcRisco}");
+                switch(opcaoEscolhida) // se for uma opcao valida, define opcao escolhida para um booleano em string
+                {
+                    case "1":
+                        opcaoEscolhida = "true";
+                        break;
+                    case "2":
+                        opcaoEscolhida = "false";
+                        break;
+                }
 
-            Console.WriteLine($"\n\rRecomendações: {ImcRecomendacao}");
+                if (!eValido) //se for uma opcao invalida, exibe mensagem e solicita novamente entrada de dado
+                    Erro.ExibeErro(TipoDado.ExibirNovamente);
+                else
+                {
+                    eValido = true; // se for opcao valida, sai do laço e limpa a tela
+                    
+                }
+
+            }
+            return bool.Parse(opcaoEscolhida); // converte a string em booleano
         }
 
-        public static void LimparTela()
+        public static void FinalizacaoConsole() 
         {
-            Console.Clear();
-        }
-
-        public static void ExibeMensagem(string mensagem)
-        {
-            Console.Write(mensagem);
+            //Finaliza o console aberto automaticamente caso o modo debug estiver configurado
+            //ou caso estiver sendo executado atraves do executavel
+            Environment.Exit(1);
         }
     }
 }

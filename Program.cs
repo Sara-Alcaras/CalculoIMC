@@ -1,17 +1,29 @@
-﻿namespace CalculoIMC;
+﻿using System.Globalization;
+
+namespace CalculoIMC;
 
 public class CalculadoraIMC : Usuario
 {
     static void Main(string[] args)
     {
-        #region Inicializa os métodos
-        UtilsConsole.Inicializacao();
+        bool exibirNovamente = true;
 
-        EntradaEValidacaoDados();
-        VerificaDadosIMC();
+        while(exibirNovamente)
+        {
+            #region Inicializa os métodos
+            UtilsConsole.Inicializacao();
 
-        UtilsConsole.Fim();
-        #endregion
+            EntradaEValidacaoDados();
+            VerificaDadosIMC();
+
+            UtilsConsole.Fim();
+
+            exibirNovamente = UtilsConsole.VerificaContinuidade();
+            UtilsConsole.LimparTela();
+            #endregion
+        }
+
+        UtilsConsole.FinalizacaoConsole();
     }
 
     public static void EntradaEValidacaoDados() // Método que chama as entrada dos dados conforme o tipo do dado e chama o método de validação

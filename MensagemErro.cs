@@ -22,6 +22,9 @@
                 case TipoDado.Peso:
                     mensagemErro = "\nPeso Inválido! \r\nInforme seu peso novamente: ";
                     break;
+                case TipoDado.ExibirNovamente:
+                    mensagemErro = "\nOpção Inválida! \r\nInforme uma opção válida: ";
+                    break;
 
                 default:
                     mensagemErro = "\nOcorreu um erro desconhecido!";

@@ -12,6 +12,7 @@ namespace CalculoIMC
         Sexo,
         Idade,
         Altura,
-        Peso
+        Peso,
+        ExibirNovamente
     }
 }
