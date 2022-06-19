@@ -8,27 +8,27 @@ namespace CalculoIMC
     {
         public static string Nome(string nome) // Verifica se o nome é válido
         {
-            bool eInvalido = true; // inicializa como verdadeiro pra realizar a validação do dado inicial
+            bool eInvalido = true; // Inicializa como verdadeiro pra realizar a validação do dado inicial
             
             while (eInvalido)
             {
                 bool somenteLetras = Regex.IsMatch(nome, "^[a-zA-Z]"); // verifica se é somente letras
                 // Verifica se o usuário está inserindo nulo, vazio ou numero 
                 bool eVazioOuNumero = string.IsNullOrEmpty(nome) || string.IsNullOrWhiteSpace(nome) || int.TryParse(nome, out int r);
-                //verifica se é vazio, nulo, numero ou string
+                // Verifica se é vazio, nulo, numero ou string
                 eInvalido = eVazioOuNumero || nome.Length <= 2 || !somenteLetras;
 
-                if (!eInvalido) //se for falso, o dado é valido e sai do laço
+                if (!eInvalido) // Se for falso, o dado é valido e sai do laço
                 {
                     eInvalido = false;
                 }
                 else
-                { // se for invalido, continua o laço solicitando novamente a entrada do dado
+                { // Se for invalido, continua o laço solicitando novamente a entrada do dado
                     Erro.ExibeErro(TipoDado.Nome);
                     nome = UtilsConsole.CapturaDadoDigitado();
                 }
             }
-            return nome; //retorna o dado valido
+            return nome; // Retorna o dado valido
         }
 
 
@@ -41,14 +41,14 @@ namespace CalculoIMC
             {
                 eValido = Enum.TryParse(strSexo, out tipoSexo) && !int.TryParse(strSexo, out int r);
 
-                switch (tipoSexo) //veirifica tipo do sexo
+                switch (tipoSexo) // Verifica o tipo do sexo
                 {
                     case TipoSexo.Masculino:
                     case TipoSexo.Feminino:
                     case TipoSexo.Outro:
                         eValido = true;
                         break;
-                    default: // se nao existir o tipo na classe TipoSexo, solicita correcao do dado de entrada
+                    default: // Se não existir o tipo na classe TipoSexo, solicita correção do dado de entrada
                         Erro.ExibeErro(TipoDado.Sexo);
                         strSexo = Console.ReadLine();
                         break;
@@ -86,7 +86,8 @@ namespace CalculoIMC
 
             while(!eValido)
             {
-                float.TryParse(strAltura.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out altura); // Aceita ponto e virgula
+                // Aceita ponto e virgula
+                float.TryParse(strAltura.Replace(",", "."), NumberStyles.Number, CultureInfo.InvariantCulture, out altura);
                 switch (altura)
                 {
                     case > 0 and <= 2.60f:

@@ -86,10 +86,10 @@
             while (!eValido)
             {
                 opcaoEscolhida = CapturaDadoDigitado(); // entrada de dado
-                // se a opcao escolhida estiver dentro do array com as opcoes validas e for igual a um, é uma opcao valida
+                // Se a opção escolhida estiver dentro do array com as opções validas e for igual a um, é uma opção valida
                 eValido = opcoes.Any(opcaoEscolhida.Contains) && opcaoEscolhida.Length == 1; 
 
-                switch(opcaoEscolhida) // se for uma opcao valida, define opcao escolhida para um booleano em string
+                switch(opcaoEscolhida) // se for uma opção válida, define opcao escolhida para um booleano em string
                 {
                     case "1":
                         opcaoEscolhida = "true";
@@ -99,21 +99,21 @@
                         break;
                 }
 
-                if (!eValido) //se for uma opcao invalida, exibe mensagem e solicita novamente entrada de dado
+                if (!eValido) // Se for uma opção invalida, exibe mensagem e solicita novamente entrada de dado
                     Erro.ExibeErro(TipoDado.ExibirNovamente);
                 else
                 {
-                    eValido = true; // se for opcao valida, sai do laço e limpa a tela
-                    
+                    eValido = true; // Se for opção válida, sai do laço e limpa a tela
+
                 }
 
             }
-            return bool.Parse(opcaoEscolhida); // converte a string em booleano
+            return bool.Parse(opcaoEscolhida); // Converte a string em booleano
         }
 
         public static void FinalizacaoConsole() 
         {
-            //Finaliza o console aberto automaticamente caso o modo debug estiver configurado
+            // Finaliza o console aberto automaticamente caso o modo debug estiver configurado
             //ou caso estiver sendo executado atraves do executavel
             Environment.Exit(1);
         }
